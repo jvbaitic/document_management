@@ -96,7 +96,7 @@ def listFiles(name):
     with open(os.path.dirname(__file__)+"/resources/Files/"+name+"/info.txt","r") as infoFile:
             info = json.load(infoFile)
             
-    paths=[[info['MEMORIA_PATH']+"/"+info['MEMORIA_CURRENT_VERSION'],'memoria',info['MEMORIA_CURRENT_VERSION_DATE']],[info['PROTOCOLO_PATH']+"/"+info['PROTOCOLO_CURRENT_VERSION'],'protocolo',info['PROTOCOLO_CURRENT_VERSION_DATE']]]
+    paths=[[info['MEMORIA_PATH']+"/"+info['MEMORIA_CURRENT_VERSION'],'memoria',info['MEMORIA_CURRENT_VERSION_DATE'],info['MEMORIA_VERSIONS']],[info['PROTOCOLO_PATH']+"/"+info['PROTOCOLO_CURRENT_VERSION'],'protocolo',info['PROTOCOLO_CURRENT_VERSION_DATE'],info['PROTOCOLO_VERSIONS']]]
     entries = ""
     for fichero in paths:
         filename = fichero[0].split("/")[1]
@@ -131,14 +131,56 @@ def listFiles(name):
                                         <input type="hidden"  name="directorio" value="""+ name +""">
                                         <input type="hidden"  name="fichero" value="""+ fichero[0] +""">
                                         <input type="hidden"  name="tipo" value="""+ fichero[1] +""">
-
                                     </button>
                                 </form>
                                 </div>
+                                <div class="col-sm-1">
+                                <button data-toggle="collapse" data-target="#"""+fichero[1]+"""" type="button" class="btn btn-success"> 
+                                        Versiones
+                                </button>
+                                </div>
                             </div>
                         </div>
+                    </div>	
+                    <div class="collapse" id="""+fichero[1]+""">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Fichero</th>
+                                    <th>Fecha de Subida</th>
+                                    <th>Tamano</th>
+                                    <th>Fecha de creacion</th>
+                                    <th>Fecha de modificacion</th>
+                                    <th>Ver</th>
+                                    <th>Recuperar</th>
+                                </tr>
+                            </thead>
+                            <tbody>"""
+
+        for version in fichero[3]:
+            st = os.stat(os.path.dirname(__file__) +"/resources/Files/"+name+"/others/"+version['NAME'])
+            entries+="""		
+                                <tr>
+                                    <td>"""+version['NAME']+"""</td>
+                                    <td>"""+version['DATE']+"""</td>
+                                    <td>"""+str(st[ST_SIZE])+""" Bytes</td>
+                                    <td>"""+str(time.asctime(time.localtime(st[ST_CTIME])))+"""</td>
+                                    <td>"""+str(time.asctime(time.localtime(st[ST_MTIME])))+"""</td>
+                                    <td>
+                                        <form method="get" action="showPDF">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="material-icons">description</i>
+                                                <input type="hidden"  name="directory" value="""+ name +"""/others>
+                                                <input type="hidden"  name="name" value="""+ version['NAME'] +""">
+                                            </button>
+                                        </form></td>
+                                </tr>"""
+        entries+=""" 
+                            </tbody> 
+                        </table>          
                     </div>
-                    """
+                """
+            
     
     return entries
 
