@@ -1,0 +1,7 @@
+{"MEMORIA_CURRENT_VERSION_DATE": "2019-03-28 12:41", 
+"MEMORIA_VERSIONS_PATH": "memoria/versions", 
+"MEMORIA_VERSIONS": [{"DATE": "28/03/2019", "NAME": "otro.docx"}], 
+"MEMORIA_PATH": "memoria", 
+"PROTOCOLO_CURRENT_VERSION": "otro.docx", 
+"PROTOCOLO_CURRENT_VERSION_DATE": "2019-03-28 12:44", 
+"PROTOCOLO_VERSIONS": [{"DATE": "2019-03-28 12:41", "NAME": "Protocolo.pdf"}], "PROTOCOLO_VERSIONS_PATH": "protocolo/versions", "PROTOCOLO_PATH": "protocolo", "MEMORIA_CURRENT_VERSION": "otro.txt"}
