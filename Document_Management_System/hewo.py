@@ -96,7 +96,10 @@ def listFiles(name):
     with open(os.path.dirname(__file__)+"/resources/Files/"+name+"/info.txt","r") as infoFile:
             info = json.load(infoFile)
             
-    paths=[[info['MEMORIA_PATH']+"/"+info['MEMORIA_CURRENT_VERSION'],'memoria',info['MEMORIA_CURRENT_VERSION_DATE'],info['MEMORIA_VERSIONS']],[info['PROTOCOLO_PATH']+"/"+info['PROTOCOLO_CURRENT_VERSION'],'protocolo',info['PROTOCOLO_CURRENT_VERSION_DATE'],info['PROTOCOLO_VERSIONS']]]
+    paths=[
+            [info['MEMORIA_PATH']+"/"+info['MEMORIA_CURRENT_VERSION'],'memoria',info['MEMORIA_CURRENT_VERSION_DATE'],info['MEMORIA_VERSIONS'],"Memoria"],
+            [info['PROTOCOLO_PATH']+"/"+info['PROTOCOLO_CURRENT_VERSION'],'protocolo',info['PROTOCOLO_CURRENT_VERSION_DATE'],info['PROTOCOLO_VERSIONS'],"Protocolo"]
+        ]
     entries = ""
     for fichero in paths:
         filename = fichero[0].split("/")[1]
@@ -106,6 +109,7 @@ def listFiles(name):
                         <div class="card-body">
                             <div class="row">       
                                 <div class="col-sm-4" >
+                                    <h3>"""+fichero[4]+""":</h3>
                                     <h4 class="card-title">"""+ filename +"""</h4>
                                     <p class="card-text">
                                         Tamano: """+str(st[ST_SIZE])+""" Bytes<br>
@@ -135,7 +139,7 @@ def listFiles(name):
                                 </form>
                                 </div>
                                 <div class="col-sm-1">
-                                <button data-toggle="collapse" data-target="#"""+fichero[1]+"""" type="button" class="btn btn-success"> 
+                                <button data-toggle="collapse" data-target="#"""+fichero[1]+"""" type="button" class="btn btn-secondary"> 
                                         Versiones
                                 </button>
                                 </div>
@@ -244,7 +248,7 @@ class WebServer(object):
 		                        </br></br>                            
                                 <h1>Sistema de Gestion Documental<h1>
 
-                                <table class="table">
+                                <br><br><table class="table">
                                     <thead>
                                         <tr>
                                             <td><h5>Nombre Instalacion</h5></td>
