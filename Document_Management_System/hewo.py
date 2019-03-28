@@ -162,7 +162,7 @@ def listFiles(name):
                             <tbody>"""
 
         for version in fichero[3]:
-            st = os.stat(os.path.dirname(__file__) +"/resources/Files/"+name+"/others/"+version['NAME'])
+            st = os.stat(os.path.dirname(__file__) +"/resources/Files/"+name+"/"+fichero[1]+"/versions/"+version['NAME'])
             entries+="""		
                                 <tr>
                                     <td>"""+version['NAME']+"""</td>
